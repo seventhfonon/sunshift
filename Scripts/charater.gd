@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @export var speed = 200
 @export var camera: Camera2D
+@export var _dialogue_manager: DialogueManager
+
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var camera_transform = $RemoteTransform2D
 
@@ -38,10 +40,19 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
-	if not in_dialogue:
-		pan_camera(delta)
-	
 
+	if not _dialogue_manager._is_active:
+		pan_camera(delta)
+		
+func _input(event: InputEvent) -> void:
+	for i in get_slide_collision_count():
+		var current_collision = get_slide_collision(i)
+		if current_collision.get_collider().is_in_group("NPC"):
+			_handle_npc_input(current_collision.get_collider(), event)
+
+func _handle_npc_input(npc: NPC, event: InputEvent) -> void:
+	if event.is_action_pressed("accept") and not _dialogue_manager._is_active and _dialogue_manager._can_activate:
+		_dialogue_manager.show_messages(npc.messages, Vector2(0,0))
 
 func pan_camera(delta):
 	if get_slide_collision_count():

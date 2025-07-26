@@ -1,15 +1,13 @@
-[gd_scene load_steps=37 format=4 uid="uid://bo45215kh6em2"]
+[gd_scene load_steps=36 format=4 uid="uid://bo45215kh6em2"]
 
 [ext_resource type="Script" uid="uid://cm4gtmkygqxeq" path="res://Scripts/PlayerCamera.gd" id="1_8ioux"]
 [ext_resource type="Texture2D" uid="uid://ddaxda35iflnl" path="res://Sprites/Chara2Upscaled.png" id="2_d7417"]
+[ext_resource type="Script" uid="uid://dwvdrxx1bmb58" path="res://Scripts/npc.gd" id="2_xl3r1"]
 [ext_resource type="TileSet" uid="uid://dlvmfvgfb1tfm" path="res://Resources/buildings.tres" id="3_xhqyo"]
 [ext_resource type="Texture2D" uid="uid://f1dbjtyj4bv5" path="res://Sprites/GrassUpscaled.png" id="4_t4h6h"]
 [ext_resource type="Texture2D" uid="uid://bdycwi24c8fe5" path="res://Sprites/Light.png" id="5_cmrj4"]
 [ext_resource type="Script" uid="uid://bw8tx3uomldwr" path="res://Scripts/charater.gd" id="6_j1yc7"]
 [ext_resource type="Texture2D" uid="uid://bc4j3pk158y6a" path="res://Sprites/CharaUpscaled.png" id="7_xifs7"]
-[ext_resource type="Script" uid="uid://dojqvrnq8w3uv" path="res://Scripts/DialoguController.gd" id="8_pqcml"]
-[ext_resource type="Texture2D" uid="uid://c05agl5a6axer" path="res://Sprites/DialogueUpscaled.png" id="9_amjnf"]
-[ext_resource type="Texture2D" uid="uid://o12majydgwea" path="res://Sprites/guy.png" id="10_uj4t5"]
 [ext_resource type="Script" uid="uid://cm15tsymvrkw8" path="res://Scripts/dialogue_manager.gd" id="11_6lskt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eski5"]
@@ -36,6 +34,10 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00tp4"]
 size = Vector2(48, 56)
+
+[sub_resource type="GDScript" id="GDScript_xl3r1"]
+script/source = "extends CollisionShape2D
+"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ehkex"]
 texture = ExtResource("4_t4h6h")
@@ -306,7 +308,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ppyta"]
 size = Vector2(30, 29)
 
-[node name="Node2D" type="Node2D"]
+[node name="Scene" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -322,8 +324,10 @@ script = ExtResource("1_8ioux")
 y_sort_enabled = true
 position = Vector2(1, 385)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="CanvasGroup"]
+[node name="StaticBody2D" type="StaticBody2D" parent="CanvasGroup" node_paths=PackedStringArray("_dialogue_manager") groups=["NPC"]]
 y_sort_enabled = true
+script = ExtResource("2_xl3r1")
+_dialogue_manager = NodePath("../../DialogueManager")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasGroup/StaticBody2D"]
 y_sort_enabled = true
@@ -335,6 +339,7 @@ offset = Vector2(0, -64)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasGroup/StaticBody2D"]
 position = Vector2(231, 227)
 shape = SubResource("RectangleShape2D_00tp4")
+script = SubResource("GDScript_xl3r1")
 
 [node name="Buildings" type="TileMapLayer" parent="CanvasGroup"]
 y_sort_enabled = true
@@ -357,12 +362,13 @@ scale = Vector2(-0.534, -0.498)
 texture = ExtResource("5_cmrj4")
 offset = Vector2(0, -576)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera", "_dialogue_manager")]
 y_sort_enabled = true
 position = Vector2(292, 709)
 motion_mode = 1
 script = ExtResource("6_j1yc7")
 camera = NodePath("../Camera2D")
+_dialogue_manager = NodePath("../DialogueManager")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 position = Vector2(0, 64)
@@ -379,88 +385,7 @@ debug_color = Color(0, 0.380392, 0.701961, 0.760784)
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="CharacterBody2D"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Dialogue" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "character")]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 64.0
-offset_top = 512.0
-offset_right = 64.0
-offset_bottom = 512.0
-script = ExtResource("8_pqcml")
-player = NodePath("../../CharacterBody2D")
-character = NodePath("../../CanvasGroup/StaticBody2D")
-
-[node name="DialogueBox" type="NinePatchRect" parent="CanvasLayer/Dialogue"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 891.0
-offset_bottom = 472.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.605884, 0.300032)
-texture = ExtResource("9_amjnf")
-region_rect = Rect2(0, 0, 768, 768)
-patch_margin_left = 256
-patch_margin_top = 256
-patch_margin_right = 256
-patch_margin_bottom = 256
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Dialogue/DialogueBox"]
-visible = false
-layout_mode = 0
-offset_right = 620.0
-offset_bottom = 180.0
-color = Color(1, 1, 1, 0.784314)
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Dialogue/DialogueBox"]
-visible = false
-layout_mode = 0
-offset_left = 10.0
-offset_top = 11.0
-offset_right = 610.0
-offset_bottom = 171.0
-color = Color(0.384314, 0.00392157, 0.27451, 0.407843)
-
-[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/Dialogue/DialogueBox"]
-visible = false
-layout_mode = 0
-offset_left = 182.0
-offset_top = 26.0
-offset_right = 222.0
-offset_bottom = 66.0
-scale = Vector2(-4.02081, 3.02801)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Dialogue"]
-z_index = 1
-position = Vector2(112, -12)
-scale = Vector2(0.192906, 0.192906)
-texture = ExtResource("10_uj4t5")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Dialogue"]
-z_index = 1
-layout_mode = 0
-offset_left = 216.0
-offset_top = -16.0
-offset_right = 488.0
-offset_bottom = 88.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-bbcode_enabled = true
-text = "I'm just a guy!"
-scroll_active = false
-
-[node name="TypeTimer" type="Timer" parent="CanvasLayer/Dialogue"]
-
-[node name="PauseTimer" type="Timer" parent="CanvasLayer/Dialogue"]
-
 [node name="DialogueManager" type="Node" parent="."]
 script = ExtResource("11_6lskt")
+
+[node name="InteractionTimer" type="Timer" parent="DialogueManager"]

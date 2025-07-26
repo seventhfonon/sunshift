@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://jnty6a5dmmk8"]
+
+[ext_resource type="Script" uid="uid://dojqvrnq8w3uv" path="res://Scripts/dialogue.gd" id="1_p21q5"]
+[ext_resource type="Texture2D" uid="uid://c05agl5a6axer" path="res://Sprites/DialogueUpscaled.png" id="2_pjl42"]
+[ext_resource type="Texture2D" uid="uid://o12majydgwea" path="res://Sprites/guy.png" id="3_5mcti"]
+
+[node name="Dialogue" type="Node2D"]
+script = ExtResource("1_p21q5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" type="NinePatchRect" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -276.0
+offset_top = -168.0
+offset_right = 635.0
+offset_bottom = 344.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.605884, 0.300032)
+texture = ExtResource("2_pjl42")
+region_rect = Rect2(0, 0, 768, 768)
+patch_margin_left = 256
+patch_margin_top = 256
+patch_margin_right = 256
+patch_margin_bottom = 256
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/DialogueBox"]
+visible = false
+layout_mode = 0
+offset_right = 620.0
+offset_bottom = 180.0
+color = Color(1, 1, 1, 0.784314)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/DialogueBox"]
+visible = false
+layout_mode = 0
+offset_left = 10.0
+offset_top = 11.0
+offset_right = 610.0
+offset_bottom = 171.0
+color = Color(0.384314, 0.00392157, 0.27451, 0.407843)
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/DialogueBox"]
+visible = false
+layout_mode = 0
+offset_left = 182.0
+offset_top = 26.0
+offset_right = 222.0
+offset_bottom = 66.0
+scale = Vector2(-4.02081, 3.02801)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+z_index = 1
+position = Vector2(176, 500)
+scale = Vector2(0.192906, 0.192906)
+texture = ExtResource("3_5mcti")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 1
+offset_left = 280.0
+offset_top = 496.0
+offset_right = 552.0
+offset_bottom = 600.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "I'm just a guy!"
+scroll_active = false
+
+[node name="TypeTimer" type="Timer" parent="."]
+
+[node name="PauseTimer" type="Timer" parent="."]
