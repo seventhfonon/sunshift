@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MoveData" load_steps=2 format=3 uid="uid://ba0x2rvesagq6"]
+
+[ext_resource type="Script" uid="uid://ci1baj5r5i5du" path="res://Scripts/move_data.gd" id="1_h86eh"]
+
+[resource]
+script = ExtResource("1_h86eh")
+name = "Weird Stuff"
+description = "Does weird shit"
+cost = 1
+actions = Array[GDScript]([])
+metadata/_custom_type_script = "uid://ci1baj5r5i5du"

@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://dplf3w6258fiu"]
+[gd_scene load_steps=25 format=3 uid="uid://dplf3w6258fiu"]
 
+[ext_resource type="Script" uid="uid://b14m37fi43snl" path="res://Scripts/battle.gd" id="1_7vlph"]
 [ext_resource type="Texture2D" uid="uid://dt0urq00dx0ux" path="res://Sprites/Battle2.png" id="1_w7k78"]
 [ext_resource type="Script" uid="uid://caqjdo3i1nmgt" path="res://Scripts/character.gd" id="2_lrv64"]
 [ext_resource type="Texture2D" uid="uid://cn6w054nkix17" path="res://Sprites/Ghost_Fly1.png" id="2_ww2ai"]
@@ -10,8 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://bqhm21uwaf318" path="res://Sprites/Ghost_Fly6.png" id="7_rssjf"]
 [ext_resource type="PackedScene" uid="uid://cui022lm7gg6e" path="res://Scenes/action_box.tscn" id="9_qeyqd"]
 [ext_resource type="Resource" uid="uid://bn86sep2ovm4f" path="res://Resources/StrongAttack.tres" id="10_k7mbx"]
+[ext_resource type="Texture2D" uid="uid://dubk0uqmsgqwm" path="res://Sprites/MoveButton.png" id="10_xkp4y"]
+[ext_resource type="Resource" uid="uid://ba0x2rvesagq6" path="res://Resources/WeirdAttack.tres" id="11_heh15"]
 [ext_resource type="Script" uid="uid://12hsnutok5st" path="res://Scripts/enemy.gd" id="11_rssjf"]
 [ext_resource type="Texture2D" uid="uid://dsomx2qlc4unc" path="res://Sprites/Ghost1.png" id="11_upb72"]
+[ext_resource type="Texture2D" uid="uid://d4caamak50r2s" path="res://Sprites/TwoWayProgressBarInnerEmpty.png" id="13_fonr4"]
+[ext_resource type="Texture2D" uid="uid://dwi2ov5su0qmm" path="res://Sprites/TwoWayProgressBarOuter.png" id="13_vd41i"]
+[ext_resource type="Texture2D" uid="uid://dj57348oh05p6" path="res://Sprites/ProgressBarFlameHalf.png" id="19_387br"]
+[ext_resource type="Texture2D" uid="uid://cl01f7nxv15yg" path="res://Sprites/ProgressBarBloomHalf.png" id="20_emx8f"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_heh15"]
 animations = [{
@@ -75,37 +82,105 @@ _data = {
 &"fly": SubResource("Animation_qeyqd")
 }
 
-[node name="Battle" type="Node2D"]
+[sub_resource type="Theme" id="Theme_486ce"]
+default_font_size = 10
+
+[node name="Battle" type="Node2D" node_paths=PackedStringArray("player_character")]
+script = ExtResource("1_7vlph")
+player_character = NodePath("Character")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(321, 242)
 texture = ExtResource("1_w7k78")
 
-[node name="Character" type="Node2D" parent="."]
-script = ExtResource("2_lrv64")
+[node name="BattleGUI" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Character"]
+[node name="ActionBox" parent="BattleGUI" instance=ExtResource("9_qeyqd")]
+position = Vector2(346, 240)
+
+[node name="ActionButton" type="Node2D" parent="BattleGUI/ActionBox"]
+position = Vector2(-321, -239)
+
+[node name="Sprite2D" type="Sprite2D" parent="BattleGUI/ActionBox/ActionButton"]
 texture_filter = 1
-position = Vector2(82, 402)
-sprite_frames = SubResource("SpriteFrames_heh15")
-animation = &"fly"
-frame_progress = 0.0438422
+position = Vector2(11, 316)
+texture = ExtResource("10_xkp4y")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Character"]
-libraries = {
-&"": SubResource("AnimationLibrary_upb72")
-}
+[node name="Label" type="Label" parent="BattleGUI/ActionBox/ActionButton"]
+texture_filter = 1
+offset_left = -2.0
+offset_top = 303.0
+offset_right = 24.0
+offset_bottom = 329.0
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="Character"]
-visible = false
-
-[node name="ActionBox" parent="." instance=ExtResource("9_qeyqd")]
-position = Vector2(321, 239)
-
-[node name="ActionBox2" parent="." instance=ExtResource("9_qeyqd")]
-position = Vector2(321, 203)
+[node name="ActionBox2" parent="BattleGUI" instance=ExtResource("9_qeyqd")]
+position = Vector2(346, 204)
 move_data = ExtResource("10_k7mbx")
+
+[node name="ActionButton2" type="Node2D" parent="BattleGUI/ActionBox2"]
+position = Vector2(-321, -203)
+
+[node name="Sprite2D" type="Sprite2D" parent="BattleGUI/ActionBox2/ActionButton2"]
+texture_filter = 1
+position = Vector2(10, 279)
+texture = ExtResource("10_xkp4y")
+
+[node name="Label" type="Label" parent="BattleGUI/ActionBox2/ActionButton2"]
+texture_filter = 1
+offset_left = -3.0
+offset_top = 266.0
+offset_right = 23.0
+offset_bottom = 292.0
+text = "B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActionBox3" parent="BattleGUI" instance=ExtResource("9_qeyqd")]
+position = Vector2(346, 168)
+move_data = ExtResource("11_heh15")
+
+[node name="ActionButton3" type="Node2D" parent="BattleGUI/ActionBox3"]
+position = Vector2(-321, -167)
+
+[node name="Sprite2D" type="Sprite2D" parent="BattleGUI/ActionBox3/ActionButton3"]
+texture_filter = 1
+position = Vector2(10, 243)
+texture = ExtResource("10_xkp4y")
+
+[node name="Label" type="Label" parent="BattleGUI/ActionBox3/ActionButton3"]
+texture_filter = 1
+offset_left = -3.0
+offset_top = 230.0
+offset_right = 23.0
+offset_bottom = 256.0
+text = "C"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FlameButton" type="Button" parent="BattleGUI"]
+offset_left = 13.0
+offset_top = 9.0
+offset_right = 100.0
+offset_bottom = 40.0
+text = "Increase Flame 1"
+
+[node name="BloomButton" type="Button" parent="BattleGUI"]
+offset_left = 13.0
+offset_top = 43.0
+offset_right = 160.0
+offset_bottom = 74.0
+text = "Increase Bloom 1"
+
+[node name="TakeDamageButton" type="Button" parent="BattleGUI"]
+offset_left = 13.0
+offset_top = 80.0
+offset_right = 160.0
+offset_bottom = 111.0
+text = "Take 10 Damage"
 
 [node name="Enemy" type="Node2D" parent="."]
 script = ExtResource("11_rssjf")
@@ -130,3 +205,76 @@ offset_left = 293.0
 offset_top = 22.0
 offset_right = 359.0
 offset_bottom = 49.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Character" type="Node2D" parent="."]
+script = ExtResource("2_lrv64")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Character"]
+texture_filter = 1
+position = Vector2(80, 398)
+sprite_frames = SubResource("SpriteFrames_heh15")
+animation = &"fly"
+frame_progress = 0.0438422
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Character"]
+libraries = {
+&"": SubResource("AnimationLibrary_upb72")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="Character"]
+visible = false
+
+[node name="AlignmentBar" type="TextureProgressBar" parent="Character"]
+offset_left = 18.0
+offset_top = 466.0
+offset_right = 147.0
+offset_bottom = 482.0
+value = 10.0
+fill_mode = 6
+texture_under = ExtResource("13_fonr4")
+texture_over = ExtResource("13_vd41i")
+
+[node name="FlameBar" type="TextureProgressBar" parent="Character"]
+offset_left = 18.0
+offset_top = 466.0
+offset_right = 146.0
+offset_bottom = 482.0
+value = 10.0
+texture_under = ExtResource("13_fonr4")
+texture_progress = ExtResource("19_387br")
+texture_progress_offset = Vector2(64, 0)
+
+[node name="HealthBar" type="TextureProgressBar" parent="Character"]
+offset_left = 22.0
+offset_top = 447.0
+offset_right = 150.0
+offset_bottom = 463.0
+value = 10.0
+texture_under = ExtResource("19_387br")
+texture_progress = ExtResource("19_387br")
+tint_under = Color(0.103744, 0.103744, 0.103744, 1)
+
+[node name="HealthLabel" type="Label" parent="Character/HealthBar"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 1.0
+offset_right = 111.0
+offset_bottom = 15.0
+theme = SubResource("Theme_486ce")
+text = "0/100 HP"
+horizontal_alignment = 1
+
+[node name="BloomBar" type="TextureProgressBar" parent="Character"]
+offset_left = 18.0
+offset_top = 466.0
+offset_right = 146.0
+offset_bottom = 482.0
+value = 40.0
+fill_mode = 1
+texture_progress = ExtResource("20_emx8f")
+
+[connection signal="pressed" from="BattleGUI/FlameButton" to="." method="_on_flame_button_pressed"]
+[connection signal="pressed" from="BattleGUI/FlameButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="BattleGUI/BloomButton" to="." method="_on_bloom_button_pressed"]
+[connection signal="pressed" from="BattleGUI/TakeDamageButton" to="." method="_on_take_damage_button_pressed"]
