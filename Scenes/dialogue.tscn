@@ -74,5 +74,7 @@ text = "I'm just a guy!"
 scroll_active = false
 
 [node name="TypeTimer" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="PauseTimer" type="Timer" parent="."]
+wait_time = 0.5

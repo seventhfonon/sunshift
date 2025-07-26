@@ -1,10 +1,6 @@
 class_name DialogueManager
 extends Node
 
-signal message_requested()
-signal message_completed()
-signal finished()
-
 const DIALOGUE_SCENE = preload("res://Scenes/dialogue.tscn")
 
 var _messages := []
@@ -17,11 +13,11 @@ var current_dialogue_instance: Dialogue
 
 func _ready() -> void:
 	_input_buffer.timeout.connect(_on_timer_timeout)
-
+	
 func _on_timer_timeout() -> void:
 	_can_activate = true
 
-func show_messages(message_list: Array, position: Vector2) -> void:
+func _show_messages(message_list: Array) -> void:
 	if _is_active or not _can_activate:
 		return
 		
@@ -30,7 +26,6 @@ func show_messages(message_list: Array, position: Vector2) -> void:
 	_active_dialogue_offset = 0
 	
 	var _dialogue = DIALOGUE_SCENE.instantiate()
-	message_completed.connect(_on_message_completed)
 	get_tree().get_root().add_child(_dialogue)
 	current_dialogue_instance = _dialogue
 	_show_current()
@@ -40,7 +35,6 @@ func _show_current() -> void:
 	current_dialogue_instance.update_message(_message)
 
 func _hide() -> void:
-	message_completed.disconnect(_on_message_completed)
 	current_dialogue_instance.queue_free()
 	current_dialogue_instance = null
 	_is_active = false
@@ -59,5 +53,5 @@ func _input(event: InputEvent) -> void:
 			else:
 				_hide()
 
-func _on_message_completed() -> void:
-		emit_signal("message_completed")
+func _on_player_show_dialogue(messages: Array) -> void:
+	_show_messages(messages)

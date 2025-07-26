@@ -7,7 +7,7 @@ extends Node2D
 @onready var _content = $CanvasLayer/RichTextLabel
 @onready var _type_timer = $TypeTimer
 @onready var _pause_timer = $PauseTimer
-		
+
 func update_message(message):
 	_content.bbcode_text = message
 	_content.visible_characters = _content.text.length()

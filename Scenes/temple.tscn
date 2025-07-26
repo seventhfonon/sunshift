@@ -389,3 +389,5 @@ remote_path = NodePath("../../Camera2D")
 script = ExtResource("11_6lskt")
 
 [node name="InteractionTimer" type="Timer" parent="DialogueManager"]
+
+[connection signal="show_dialogue" from="CharacterBody2D" to="DialogueManager" method="_on_player_show_dialogue"]

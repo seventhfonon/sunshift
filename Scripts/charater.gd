@@ -1,7 +1,10 @@
+class_name Player
 extends CharacterBody2D
 
+signal show_dialogue(messages: Array[String])
+
 @export var speed = 200
-@export var camera: Camera2D
+@export var camera: Camera2D 
 @export var _dialogue_manager: DialogueManager
 
 @onready var animated_sprite = $AnimatedSprite2D
@@ -11,6 +14,9 @@ var lastMovement = Vector2.ZERO
 var input_direction: Vector2
 var camera_buffer = 0
 var in_dialogue = false
+
+func _ready() -> void:
+	show_dialogue.connect(Callable(DialogueManager, "_on_player_show_dialogue"))
 
 func get_input():
 	input_direction = Input.get_vector("left", "right", "up", "down")
@@ -35,7 +41,6 @@ func get_input():
 			animated_sprite.play("standdown")
 		elif lastMovement.y < 0:
 			animated_sprite.play("standup")
-	
 
 func _physics_process(delta):
 	get_input()
@@ -51,8 +56,10 @@ func _input(event: InputEvent) -> void:
 			_handle_npc_input(current_collision.get_collider(), event)
 
 func _handle_npc_input(npc: NPC, event: InputEvent) -> void:
+	print_debug("Handling NPC...")
 	if event.is_action_pressed("accept") and not _dialogue_manager._is_active and _dialogue_manager._can_activate:
-		_dialogue_manager.show_messages(npc.messages, Vector2(0,0))
+		print_debug("Showing dialogue...")
+		show_dialogue.emit(npc.messages)
 
 func pan_camera(delta):
 	if get_slide_collision_count():
