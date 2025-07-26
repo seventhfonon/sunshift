@@ -1,0 +1,132 @@
+[gd_scene load_steps=17 format=3 uid="uid://dplf3w6258fiu"]
+
+[ext_resource type="Texture2D" uid="uid://dt0urq00dx0ux" path="res://Sprites/Battle2.png" id="1_w7k78"]
+[ext_resource type="Script" uid="uid://caqjdo3i1nmgt" path="res://Scripts/character.gd" id="2_lrv64"]
+[ext_resource type="Texture2D" uid="uid://cn6w054nkix17" path="res://Sprites/Ghost_Fly1.png" id="2_ww2ai"]
+[ext_resource type="Texture2D" uid="uid://tf1y64ixr73g" path="res://Sprites/Ghost_Fly2.png" id="3_lrv64"]
+[ext_resource type="Texture2D" uid="uid://brnl0jkgs0u46" path="res://Sprites/Ghost_Fly3.png" id="4_qeyqd"]
+[ext_resource type="Texture2D" uid="uid://cabf757ogtjwp" path="res://Sprites/Ghost_Fly4.png" id="5_k7mbx"]
+[ext_resource type="Texture2D" uid="uid://ege14b0opf8g" path="res://Sprites/Ghost_Fly5.png" id="6_upb72"]
+[ext_resource type="Texture2D" uid="uid://bqhm21uwaf318" path="res://Sprites/Ghost_Fly6.png" id="7_rssjf"]
+[ext_resource type="PackedScene" uid="uid://cui022lm7gg6e" path="res://Scenes/action_box.tscn" id="9_qeyqd"]
+[ext_resource type="Resource" uid="uid://bn86sep2ovm4f" path="res://Resources/StrongAttack.tres" id="10_k7mbx"]
+[ext_resource type="Script" uid="uid://12hsnutok5st" path="res://Scripts/enemy.gd" id="11_rssjf"]
+[ext_resource type="Texture2D" uid="uid://dsomx2qlc4unc" path="res://Sprites/Ghost1.png" id="11_upb72"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_heh15"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ww2ai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lrv64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qeyqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_k7mbx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_upb72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rssjf")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_k7mbx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_qeyqd"]
+resource_name = "fly"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.766667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [null, null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_upb72"]
+_data = {
+&"RESET": SubResource("Animation_k7mbx"),
+&"fly": SubResource("Animation_qeyqd")
+}
+
+[node name="Battle" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(321, 242)
+texture = ExtResource("1_w7k78")
+
+[node name="Character" type="Node2D" parent="."]
+script = ExtResource("2_lrv64")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Character"]
+texture_filter = 1
+position = Vector2(82, 402)
+sprite_frames = SubResource("SpriteFrames_heh15")
+animation = &"fly"
+frame_progress = 0.0438422
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Character"]
+libraries = {
+&"": SubResource("AnimationLibrary_upb72")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="Character"]
+visible = false
+
+[node name="ActionBox" parent="." instance=ExtResource("9_qeyqd")]
+position = Vector2(321, 239)
+
+[node name="ActionBox2" parent="." instance=ExtResource("9_qeyqd")]
+position = Vector2(321, 203)
+move_data = ExtResource("10_k7mbx")
+
+[node name="Enemy" type="Node2D" parent="."]
+script = ExtResource("11_rssjf")
+
+[node name="EnemySprite" type="Sprite2D" parent="Enemy"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(322, 146)
+scale = Vector2(2, 2)
+texture = ExtResource("11_upb72")
+
+[node name="HealthLabel" type="Label" parent="Enemy"]
+visible = false
+offset_left = 288.0
+offset_top = 26.0
+offset_right = 362.0
+offset_bottom = 49.0
+text = "100"
+
+[node name="ProgressBar" type="ProgressBar" parent="Enemy"]
+offset_left = 293.0
+offset_top = 22.0
+offset_right = 359.0
+offset_bottom = 49.0

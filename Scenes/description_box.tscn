@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://by11fu530vujc"]
+
+[ext_resource type="Texture2D" uid="uid://c23f0l7s6xvxu" path="res://Sprites/ActionBox3.png" id="1_vvo0v"]
+
+[node name="DescriptionBox" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_vvo0v")
+
+[node name="DescriptionLabel" type="Label" parent="."]
+texture_filter = 1
+offset_left = -59.0
+offset_top = -12.0
+offset_right = 59.0
+offset_bottom = 11.0
+text = "Default Text"
+horizontal_alignment = 1

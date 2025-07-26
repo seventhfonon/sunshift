@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MoveData" load_steps=2 format=3 uid="uid://bn86sep2ovm4f"]
+
+[ext_resource type="Script" uid="uid://ci1baj5r5i5du" path="res://Scripts/move_data.gd" id="1_m02jv"]
+
+[resource]
+script = ExtResource("1_m02jv")
+name = "Strong Attack"
+description = "Attacks 1 opponent for high  physical damage"
+cost = 2
+actions = Array[GDScript]([])
+metadata/_custom_type_script = "uid://ci1baj5r5i5du"

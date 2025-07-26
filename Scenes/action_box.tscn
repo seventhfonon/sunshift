@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://cui022lm7gg6e"]
+
+[ext_resource type="Script" uid="uid://hy3ss1xsrpef" path="res://Scripts/action_box.gd" id="1_3ocm8"]
+[ext_resource type="Texture2D" uid="uid://bcfwxhsle7w7a" path="res://Sprites/ActionBox2.png" id="2_3g2sw"]
+[ext_resource type="Resource" uid="uid://dqougt22adbjd" path="res://Resources/BasicAttack.tres" id="2_6c0x3"]
+[ext_resource type="Texture2D" uid="uid://c23f0l7s6xvxu" path="res://Sprites/ActionBox3.png" id="3_6c0x3"]
+[ext_resource type="Texture2D" uid="uid://dvxrn8tjakp7j" path="res://Sprites/ActionBox4.png" id="4_2yxdk"]
+[ext_resource type="PackedScene" uid="uid://by11fu530vujc" path="res://Scenes/description_box.tscn" id="5_3g2sw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lrv64"]
+size = Vector2(128, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xkp4y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6c0x3")
+}],
+"loop": true,
+"name": &"not_selected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2yxdk")
+}],
+"loop": true,
+"name": &"selected",
+"speed": 5.0
+}]
+
+[node name="ActionBox" type="Node2D"]
+script = ExtResource("1_3ocm8")
+move_data = ExtResource("2_6c0x3")
+
+[node name="ActionBoxArea" type="Area2D" parent="."]
+position = Vector2(-321, -242)
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionBoxArea"]
+visible = false
+texture_filter = 1
+position = Vector2(80, 318)
+texture = ExtResource("2_3g2sw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionBoxArea"]
+position = Vector2(80, 318)
+shape = SubResource("RectangleShape2D_lrv64")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ActionBoxArea"]
+texture_filter = 1
+position = Vector2(80, 318)
+sprite_frames = SubResource("SpriteFrames_xkp4y")
+animation = &"not_selected"
+
+[node name="MoveLabel" type="Label" parent="ActionBoxArea"]
+texture_filter = 1
+offset_left = 21.0
+offset_top = 305.0
+offset_right = 139.0
+offset_bottom = 331.0
+text = "Default Move"
+horizontal_alignment = 1
+
+[node name="DescriptionBox" parent="." instance=ExtResource("5_3g2sw")]
+position = Vector2(-106, 76)
+
+[connection signal="mouse_entered" from="ActionBoxArea" to="." method="_on_action_box_area_mouse_entered"]
+[connection signal="mouse_exited" from="ActionBoxArea" to="." method="_on_action_box_area_mouse_exited"]
