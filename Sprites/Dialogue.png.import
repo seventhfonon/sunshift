@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f1dbjtyj4bv5"
-path="res://.godot/imported/GrassUpscaled.png-1a004f4a1c13849c040d95bff117ed33.ctex"
+uid="uid://da36om7q7c1o5"
+path="res://.godot/imported/Dialogue.png-874b3607fba20906fb5fee4823d3a0b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GrassUpscaled.png"
-dest_files=["res://.godot/imported/GrassUpscaled.png-1a004f4a1c13849c040d95bff117ed33.ctex"]
+source_file="res://Sprites/Dialogue.png"
+dest_files=["res://.godot/imported/Dialogue.png-874b3607fba20906fb5fee4823d3a0b5.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c05agl5a6axer"
-path="res://.godot/imported/DialogueUpscaled.png-d96c1517bfb2ce0293b77646bd04411b.ctex"
+uid="uid://o12majydgwea"
+path="res://.godot/imported/guy.png-a0613c07e0e5eecfeffebed4f6135d53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://DialogueUpscaled.png"
-dest_files=["res://.godot/imported/DialogueUpscaled.png-d96c1517bfb2ce0293b77646bd04411b.ctex"]
+source_file="res://Sprites/guy.png"
+dest_files=["res://.godot/imported/guy.png-a0613c07e0e5eecfeffebed4f6135d53.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o12majydgwea"
-path="res://.godot/imported/guy.png-64a8d6e0294e356486ef1e77ad36474d.ctex"
+uid="uid://bw8tw38uw7lsa"
+path="res://.godot/imported/Temple.png-bbfd6e2acabd3b07b72f1721088a689b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://guy.png"
-dest_files=["res://.godot/imported/guy.png-64a8d6e0294e356486ef1e77ad36474d.ctex"]
+source_file="res://Sprites/Temple.png"
+dest_files=["res://.godot/imported/Temple.png-bbfd6e2acabd3b07b72f1721088a689b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddaxda35iflnl"
-path="res://.godot/imported/Chara2Upscaled.png-bd5a9b79b3fe29cc4dc0272c59c6ab58.ctex"
+uid="uid://f1dbjtyj4bv5"
+path="res://.godot/imported/GrassUpscaled.png-49669d70fcb7b929530e0ffc69b9d41b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Chara2Upscaled.png"
-dest_files=["res://.godot/imported/Chara2Upscaled.png-bd5a9b79b3fe29cc4dc0272c59c6ab58.ctex"]
+source_file="res://Sprites/GrassUpscaled.png"
+dest_files=["res://.godot/imported/GrassUpscaled.png-49669d70fcb7b929530e0ffc69b9d41b.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dlvmfvgfb1tfm"]
 
-[ext_resource type="Texture2D" uid="uid://crf1n2cotoswp" path="res://TempleUpscaled.png" id="1_2i4hl"]
+[ext_resource type="Texture2D" uid="uid://crf1n2cotoswp" path="res://Sprites/TempleUpscaled.png" id="1_vahs4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ykrsh"]
-texture = ExtResource("1_2i4hl")
+texture = ExtResource("1_vahs4")
 texture_region_size = Vector2i(64, 64)
 1:0/0 = 0
 1:0/0/y_sort_origin = 16

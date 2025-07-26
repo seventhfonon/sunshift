@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://crf1n2cotoswp"
-path="res://.godot/imported/TempleUpscaled.png-9e3d3ae84da23221469c6edf7d16e03e.ctex"
+path="res://.godot/imported/TempleUpscaled.png-4660b8143ff179f82668bb2349c73bec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TempleUpscaled.png"
-dest_files=["res://.godot/imported/TempleUpscaled.png-9e3d3ae84da23221469c6edf7d16e03e.ctex"]
+source_file="res://Sprites/TempleUpscaled.png"
+dest_files=["res://.godot/imported/TempleUpscaled.png-4660b8143ff179f82668bb2349c73bec.ctex"]
 
 [params]
 

@@ -13,7 +13,7 @@ config_version=5
 config/name="Sunshift"
 run/main_scene="uid://bo45215kh6em2"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Sprites/icon.svg"
 
 [display]
 

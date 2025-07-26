@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da36om7q7c1o5"
-path="res://.godot/imported/Dialogue.png-2035fa01484edf89dcc1590641d3ef9d.ctex"
+uid="uid://c7134h54ptcey"
+path="res://.godot/imported/Chara.png-5a7601f12673afd7d85843d448e44bd4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dialogue.png"
-dest_files=["res://.godot/imported/Dialogue.png-2035fa01484edf89dcc1590641d3ef9d.ctex"]
+source_file="res://Sprites/Chara.png"
+dest_files=["res://.godot/imported/Chara.png-5a7601f12673afd7d85843d448e44bd4.ctex"]
 
 [params]
 
