@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://dplf3w6258fiu"]
 
-[ext_resource type="Script" uid="uid://b14m37fi43snl" path="res://Scripts/battle.gd" id="1_7vlph"]
+[ext_resource type="Script" path="res://Scripts/battle.gd" id="1_7vlph"]
 [ext_resource type="Texture2D" uid="uid://dt0urq00dx0ux" path="res://Sprites/Battle2.png" id="1_w7k78"]
 [ext_resource type="Script" uid="uid://caqjdo3i1nmgt" path="res://Scripts/character.gd" id="2_lrv64"]
 [ext_resource type="Texture2D" uid="uid://cn6w054nkix17" path="res://Sprites/Ghost_Fly1.png" id="2_ww2ai"]
@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cui022lm7gg6e" path="res://Scenes/action_box.tscn" id="9_qeyqd"]
 [ext_resource type="Resource" uid="uid://bn86sep2ovm4f" path="res://Resources/StrongAttack.tres" id="10_k7mbx"]
 [ext_resource type="Texture2D" uid="uid://dubk0uqmsgqwm" path="res://Sprites/MoveButton.png" id="10_xkp4y"]
-[ext_resource type="Resource" uid="uid://ba0x2rvesagq6" path="res://Resources/WeirdAttack.tres" id="11_heh15"]
+[ext_resource type="Resource" path="res://Resources/WeirdAttack.tres" id="11_heh15"]
 [ext_resource type="Script" uid="uid://12hsnutok5st" path="res://Scripts/enemy.gd" id="11_rssjf"]
 [ext_resource type="Texture2D" uid="uid://dsomx2qlc4unc" path="res://Sprites/Ghost1.png" id="11_upb72"]
 [ext_resource type="Texture2D" uid="uid://d4caamak50r2s" path="res://Sprites/TwoWayProgressBarInnerEmpty.png" id="13_fonr4"]
@@ -274,7 +274,7 @@ value = 40.0
 fill_mode = 1
 texture_progress = ExtResource("20_emx8f")
 
-[connection signal="pressed" from="BattleGUI/FlameButton" to="." method="_on_flame_button_pressed"]
 [connection signal="pressed" from="BattleGUI/FlameButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="BattleGUI/FlameButton" to="." method="_on_flame_button_pressed"]
 [connection signal="pressed" from="BattleGUI/BloomButton" to="." method="_on_bloom_button_pressed"]
 [connection signal="pressed" from="BattleGUI/TakeDamageButton" to="." method="_on_take_damage_button_pressed"]

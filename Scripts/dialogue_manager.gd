@@ -1,6 +1,9 @@
 class_name DialogueManager
 extends Node
 
+signal dialogue_started
+signal dialogue_finished
+
 const DIALOGUE_SCENE = preload("res://Scenes/dialogue.tscn")
 
 var _messages := []
@@ -20,7 +23,9 @@ func _on_timer_timeout() -> void:
 func _show_messages(message_list: Array) -> void:
 	if _is_active or not _can_activate:
 		return
-		
+	
+	dialogue_started.emit()
+	
 	_is_active = true
 	_messages = message_list
 	_active_dialogue_offset = 0
@@ -35,6 +40,7 @@ func _show_current() -> void:
 	current_dialogue_instance.update_message(_message)
 
 func _hide() -> void:
+	dialogue_finished.emit()
 	current_dialogue_instance.queue_free()
 	current_dialogue_instance = null
 	_is_active = false

@@ -224,7 +224,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_g14j6")
 }],
 "loop": true,
-"name": &"standdown",
+"name": &"stand_down",
 "speed": 5.0
 }, {
 "frames": [{
@@ -235,7 +235,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ehkex")
 }],
 "loop": true,
-"name": &"standleft",
+"name": &"stand_left",
 "speed": 5.0
 }, {
 "frames": [{
@@ -246,7 +246,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_00tp4")
 }],
 "loop": true,
-"name": &"standright",
+"name": &"stand_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -257,7 +257,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_5tkv4")
 }],
 "loop": true,
-"name": &"standup",
+"name": &"stand_up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -268,7 +268,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_b0q6j")
 }],
 "loop": true,
-"name": &"walkdown",
+"name": &"walk_down",
 "speed": 5.0
 }, {
 "frames": [{
@@ -279,7 +279,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_a3se8")
 }],
 "loop": true,
-"name": &"walkleft",
+"name": &"walk_left",
 "speed": 5.0
 }, {
 "frames": [{
@@ -290,7 +290,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_45l4g")
 }],
 "loop": true,
-"name": &"walkright",
+"name": &"walk_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -301,7 +301,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_vxl6d")
 }],
 "loop": true,
-"name": &"walkup",
+"name": &"walk_up",
 "speed": 5.0
 }]
 
@@ -324,10 +324,9 @@ script = ExtResource("1_8ioux")
 y_sort_enabled = true
 position = Vector2(1, 385)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="CanvasGroup" node_paths=PackedStringArray("_dialogue_manager") groups=["NPC"]]
+[node name="StaticBody2D" type="StaticBody2D" parent="CanvasGroup" groups=["NPC"]]
 y_sort_enabled = true
 script = ExtResource("2_xl3r1")
-_dialogue_manager = NodePath("../../DialogueManager")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasGroup/StaticBody2D"]
 y_sort_enabled = true
@@ -362,19 +361,29 @@ scale = Vector2(-0.534, -0.498)
 texture = ExtResource("5_cmrj4")
 offset = Vector2(0, -576)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera", "_dialogue_manager")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera")]
 y_sort_enabled = true
 position = Vector2(292, 709)
 motion_mode = 1
 script = ExtResource("6_j1yc7")
 camera = NodePath("../Camera2D")
-_dialogue_manager = NodePath("../DialogueManager")
+_walk_sprites = Dictionary[Vector2, String]({
+Vector2(-1, -1): "left",
+Vector2(-1, 0): "left",
+Vector2(-1, 1): "left",
+Vector2(0, -1): "up",
+Vector2(0, 0): "down",
+Vector2(0, 1): "down",
+Vector2(1, -1): "right",
+Vector2(1, 0): "right",
+Vector2(1, 1): "right"
+})
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 position = Vector2(0, 64)
 sprite_frames = SubResource("SpriteFrames_37kl0")
-animation = &"walkup"
-autoplay = "standdown"
+animation = &"stand_right"
+autoplay = "stand_down"
 offset = Vector2(0, -64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -385,9 +394,13 @@ debug_color = Color(0, 0.380392, 0.701961, 0.760784)
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="CharacterBody2D"]
 remote_path = NodePath("../../Camera2D")
 
+[node name="PanTimer" type="Timer" parent="CharacterBody2D"]
+
 [node name="DialogueManager" type="Node" parent="."]
 script = ExtResource("11_6lskt")
 
 [node name="InteractionTimer" type="Timer" parent="DialogueManager"]
 
-[connection signal="show_dialogue" from="CharacterBody2D" to="DialogueManager" method="_on_player_show_dialogue"]
+[connection signal="request_dialogue" from="CharacterBody2D" to="DialogueManager" method="_on_player_show_dialogue"]
+[connection signal="dialogue_finished" from="DialogueManager" to="CharacterBody2D" method="_on_dialogue_manager_message_finished"]
+[connection signal="dialogue_started" from="DialogueManager" to="CharacterBody2D" method="_on_dialogue_manager_message_started"]
